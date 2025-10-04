@@ -1,6 +1,7 @@
 from dotenv import load_dotenv
 import os
 from langchain_google_genai import ChatGoogleGenerativeAI
+from langchain_core.messages import AIMessage, HumanMessage, SystemMessage
 
 load_dotenv()
 
@@ -16,8 +17,22 @@ def basic_chat():
         api_key=api_key
     )
 
-    response = llm.invoke("Tell me a poem about the monsoon in India.")
-    print("Response:", response.content)
+    chat_history=[]
+    system_message=SystemMessage(content="You are a Software Engineer ,show you only answer the technical question which are only relate to the software field")
+    chat_history.append(system_message)
+
+    while True:
+        query=input("You:")
+        if query.lower()=='exit':
+            break
+        chat_history.append(HumanMessage(content=query))
+
+        response=llm.invoke(chat_history)
+        result=response.content
+        chat_history.append(AIMessage(content=result))
+        print(f"AI Response: {result}")
+
+    
 
 if __name__ == "__main__":
     basic_chat()

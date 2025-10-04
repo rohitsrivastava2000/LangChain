@@ -1,2 +1,3 @@
-langchain_google_genai
-dotenv
+langchain-google-genai
+python-dotenv
+langchain-core
