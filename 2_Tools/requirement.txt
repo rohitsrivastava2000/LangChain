@@ -1,2 +1,3 @@
 langchain-community
 ddgs
+python-dotenv
